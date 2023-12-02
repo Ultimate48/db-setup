@@ -20,7 +20,7 @@ async function testCases() {
     const post = await Post.create({
         user_id: user.id,
         content: 'test post content',
-        posted_at: new Date()
+        posted_at: '2021-03-01 00:00:00'
     });
 
     // 3. Create a new follow
@@ -40,7 +40,7 @@ async function testCases() {
         user_id: user.id,
         post_id: post.id,
         reply_content: 'test reply content',
-        replied_at: new Date()
+        replied_at: '2021-03-01 00:00:00'
     });
 }
 
