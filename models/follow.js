@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Follow.init({
     follower_id: DataTypes.BIGINT,
-    following_id: DataTypes.BIGINT
+    following_id: DataTypes.BIGINT,
+    combined_id: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Follow',

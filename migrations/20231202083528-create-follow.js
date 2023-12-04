@@ -22,13 +22,10 @@ module.exports = {
           model: 'Users',
           key: 'id'
         },
-        validate: {
-          notSameUser(value) {
-            if (value === this.follower_id) {
-              throw new Error('You cannot follow yourself');
-            }
-          }
-        }
+      },
+      combined_id: {
+        type: Sequelize.STRING,
+        unique: true
       },
       createdAt: {
         allowNull: false,

@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Like.init({
     user_id: DataTypes.BIGINT,
-    post_id: DataTypes.BIGINT
+    post_id: DataTypes.BIGINT,
+    combined_id: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Like',
