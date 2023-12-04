@@ -47,3 +47,65 @@ async function createReply(user_id, post_id, reply_content, replied_at) {
     return reply;
 }
 
+async function getRepliesByUser(user_id) {
+    const replies = await Replies.findAll({
+        where: {
+            user_id: user_id
+        }
+    });
+    return replies;
+}
+
+async function getLikesByUser(user_id) {
+    const likes = await Like.findAll({
+        where: {
+            user_id: user_id
+        }
+    });
+    return likes;
+}
+
+async function getFollowsByUser(user_id) {
+    const follows = await Follow.findAll({
+        where: {
+            following_id: user_id
+        }
+    });
+    return follows;
+}
+
+async function getUserFollowers(user_id) {
+    const followers = await Follow.findAll({
+        where: {
+            follower_id: user_id
+        }
+    });
+    return followers;
+}
+
+async function getPostsByUser(user_id) {
+    const posts = await Post.findAll({
+        where: {
+            user_id: user_id
+        }
+    });
+    return posts;
+}
+
+async function deleteUser(user_id){
+    const replies = getRepliesByUser(user_id);
+    const likes = getLikesByUser(user_id);
+    const follows = getFollowsByUser(user_id);
+    const followers = getUserFollowers(user_id);
+    const posts = getPostsByUser(user_id);
+    await replies.destroy();
+    await likes.destroy();
+    await follows.destroy();
+    await followers.destroy();
+    await posts.destroy();
+    await User.destroy({
+        where: {
+            user_id: user_id
+        }
+    });
+}
