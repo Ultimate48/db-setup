@@ -109,3 +109,33 @@ async function deleteUser(user_id){
         }
     });
 }
+
+async function getRepliesByPost(post_id) {
+    const replies = await Replies.findAll({
+        where: {
+            post_id: post_id
+        }
+    });
+    return replies;
+}
+
+async function getLikesByPost(post_id) {
+    const likes = await Like.findAll({
+        where: {
+            post_id: post_id
+        }
+    });
+    return likes;
+}
+
+async function deletePost(post_id){
+    const replies = getRepliesByPost(post_id);
+    const likes = getLikesByPost(post_id);
+    await replies.destroy();
+    await likes.destroy();
+    await Post.destroy({
+        where: {
+            post_id: post_id
+        }
+    });
+}
